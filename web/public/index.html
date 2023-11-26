@@ -20,19 +20,19 @@
     </nav>
     <div id="vindu">
         <div id="knappene">
-            <button id="button1">3D graf</button>
-            <button id="button2">2D graf</button>
+            <button id="button2D">2D graf</button>
+            <button id="button3D">3D graf</button>
         </div>
     
         <div id="fradata">
             <div id="data">
                 <p>Her kommer hva som helst av hvordan data vi ønsker tall kanskje</p>
             </div>
-            <div id="2Dgraf" style="display:none">
+            <div id="container2D">
                 <p>Her kommer 2D graf som viser volumet til bunnslam</p>
-                <img src="./img/2dgraf.png" width="600" alt="2Dgraf">
+                <canvas id="myChart"></canvas>
             </div>
-            <div id="container3D">
+            <div id="container3D" style="display:none">
                 <!-- <p>Her kommer 3D graf hvor vi kan se hvordan bunnslammet har lagt seg under merden.</p>
                 <img src="./img/3dgraf.jpeg" width="500" hight="700" alt="2Dgraf"> -->
             </div>
@@ -44,14 +44,21 @@
         <img src="./img/havbruk.jpeg" width="300" hight="" alt="havbruk">
         <img src="./img/fisk.jpg" width="300" hight="" alt="en fisker">
     </div>
+
+    <div>
+    </div>
+      
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     </main>
 
     <script type="importmap">
         {
             "imports": {
-            "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.157.0/three.module.js",
-            "three/addons/": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.157.0/examples/jsm/"
+                "firebase/firestore": "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js",
+                "plotly": "https://cdn.plot.ly/plotly-2.27.0.min.js",
+                "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.157.0/three.module.js",
+                "three/addons/": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.157.0/examples/jsm/"
             }
         }
     </script>

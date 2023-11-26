@@ -1,8 +1,52 @@
 import * as THREE from "three"
-import {collection, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js"
+import { collection, getDocs, orderBy } from "firebase/firestore"
 import { db } from "./app.js"
 
+
+const button2D = document.getElementById("button2D")
+const button3D = document.getElementById("button3D")
+const container2D = document.getElementById("container2D")
 const container3D = document.getElementById("container3D")
+
+button2D.onclick = () => {
+    container2D.style.display = "block"
+    container3D.style.display = "none"
+}
+
+button3D.onclick = () => {
+    container2D.style.display = "none"
+    container3D.style.display = "block"
+}
+
+const ctx = document.getElementById('myChart')
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [1, 2, 3, 4, 5, 6, 7],
+        datasets: [{
+            // label: 'My First Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            // borderColor: 'rgb(75, 192, 192)',
+            // tension: 0.1
+        }]
+    },
+    options: {
+        animation: false,
+        transitions: {
+            activate: {
+                animation: {
+                    duration: 0
+                }
+            }
+        }
+        // scales: {
+        //     y: {
+        //         beginAtZero: true
+        //     }
+        // }
+    }
+})
+
 
 const sensorDataList = document.getElementById("sensorDataList")
 const sensorData = new Map()
@@ -13,7 +57,7 @@ querySnapshot.forEach((doc) => {
     sensorData[doc.id] = doc.data().sensors
     const li = document.createElement("li")
     const date = new Date(doc.id*1000)
-    li.innerText = date.toLocaleString('no-NO', { timeZone: 'Europe/Oslo' });
+    li.innerText = date.toLocaleString('no-NO', { timeZone: 'Europe/Oslo' })
     li.setAttribute("id", doc.id)
     li.onclick = () => {
         console.log(sensorData[li.id])
@@ -32,10 +76,6 @@ let mesh = createMesh(scene, [1, 1, 1, 1, 1, 1, 1, 1, 1], 0)
 const renderer = new THREE.WebGLRenderer()
 renderer.setSize(700, 400)
 container3D.appendChild(renderer.domElement)
-
-const axesHelper = new THREE.AxesHelper(5)
-scene.add(axesHelper)
-
 
 const pg = new THREE.PlaneGeometry(100, 100)
 const pm = new THREE.MeshPhongMaterial({color: 0x0000ff, side: THREE.DoubleSide})
